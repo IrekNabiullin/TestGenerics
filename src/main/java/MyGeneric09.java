@@ -13,10 +13,12 @@ public class MyGeneric09 {
         MyGeneric09.print4(obj1);           // 10.0
         MyGeneric09.print4(obj2);           // 5.6
         MyGeneric09.print5(obj1);           // 10
+        MyGeneric09.print6(obj2);           // 5.6
         // Можно только Box<Integer> и Box<Number>
         // MyClass.print5(obj2);
         Box<Number> obj3 = new Box<Number>(5.6);
         MyGeneric09.print5(obj3);           // 5.6
+
     }
 
     public static void print1(Box<Integer> obj) {
@@ -47,6 +49,16 @@ public class MyGeneric09 {
         System.out.println(obj.getObj().toString());
     }
 
+//Замена метода print3() из листинга в методе main:
+    public static void print6(Box<? extends Number> obj) {
+        System.out.println(obj.getObj().doubleValue());
+        // Тип не знаем
+        // obj.setObj(obj.getObj()); // Ошибка
+        MyGeneric09.test(obj);
+    }
+    public static <T> void test(Box<T> obj) {
+        obj.setObj(obj.getObj());     // OK
+    }
 
     static class Box<T> {
         private T obj;
